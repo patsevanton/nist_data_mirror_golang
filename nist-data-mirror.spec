@@ -1,5 +1,5 @@
 Name:           nist-data-mirror
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
 Summary:        A simple Golang command-line utility to mirror the CVE JSON data from NIST.
 License:        ASL 2.0 
