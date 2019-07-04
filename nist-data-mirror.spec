@@ -1,26 +1,23 @@
 Name:           nist-data-mirror
 Version:        0.0.1
 Release:        1%{?dist}
-Summary:        This application is an example for the golang binary RPM spec
+Summary:        A simple Golang command-line utility to mirror the CVE JSON data from NIST.
 License:        ASL 2.0 
 Source0:        main.go
-#Source1:        nist-data-mirror.service
+Source1:        nist-data-mirror.service
 
 BuildRequires:  golang
 
 %description
-# include your full description of the application here.
+A simple Golang command-line utility to mirror the CVE XML and JSON data from NIST.
 
 %build
 mkdir -p _build/src/github.com/patsevanton/nist_data_mirror_golang
 cp ../SOURCES/main.go _build/src/github.com/patsevanton/nist_data_mirror_golang
-echo $(pwd)
 export GOPATH=$(pwd)/_build
 export PATH=$PATH:$(pwd)/_build/bin
-go env
 
 go get -u github.com/gocolly/colly
-echo $(pwd)
 pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
 go build -o ../../../../../nist-data-mirror
 popd
