@@ -20,11 +20,11 @@ echo $GOPATH
 
 go get -u github.com/gocolly/colly
 #go get -u github.com/kardianos/govendor
-pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
+#pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
 pwd
 #govendor sync
 go build 
-popd
+#popd
 
 %install
 install -d %{buildroot}%{_bindir}
