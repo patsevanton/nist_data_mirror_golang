@@ -18,6 +18,7 @@ export GOPATH=$(pwd)/_build
 export PATH=$PATH:$(pwd)/_build/bin
 
 go get -u github.com/gocolly/colly
+go get -u github.com/kardianos/govendor
 pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
 #govendor sync
 go build 
