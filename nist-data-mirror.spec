@@ -5,7 +5,6 @@ Summary:        This application is an example for the golang binary RPM spec
 License:        ASL 2.0 
 Source0:        nist-data-mirror.go
 #Source1:        nist-data-mirror.service
-
 BuildRequires:  golang
 
 %description
