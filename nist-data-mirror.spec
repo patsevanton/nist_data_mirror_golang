@@ -14,12 +14,13 @@ BuildRequires:  golang
 %build
 mkdir -p ./_build/src/github.com/patsevanton/
 cp ../SOURCES/main.go ./_build/src/github.com/patsevanton/
-echo $(pwd)
+pwd
 export GOPATH=$(pwd)/_build
 export PATH=$PATH:$(pwd)/_build/bin
 go env
 
 go get -u github.com/gocolly/colly
+pwd
 pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
 go build 
 popd
