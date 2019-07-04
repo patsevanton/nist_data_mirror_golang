@@ -13,15 +13,11 @@ BuildRequires:  golang
 
 %build
 mkdir -p ./_build/src/github.com/patsevanton/
-ln -s $(pwd) ./_build/src/github.com/patsevanton/nist_data_mirror_golang
-export GOPATH=$(pwd)/_build
-export PATH=$PATH:$(pwd)/_build/bin
+ln -s $(pwd) ./_build/src/src/github.com/patsevanton/nist_data_mirror_golang
 
+export GOPATH=$(pwd)/_build:%{gopath}
 go get -u github.com/gocolly/colly
-pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
-#govendor sync
-go build nist-data-mirror.go
-popd
+go build nist-data-mirror.go .
 
 %install
 install -d %{buildroot}%{_bindir}
