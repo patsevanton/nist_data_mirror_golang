@@ -1,0 +1,12 @@
+[Unit]
+Description=nist-data-mirror
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/nist-data-mirror
+Restart=on-abort
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
