@@ -13,7 +13,7 @@ BuildRequires:  golang
 
 %build
 mkdir -p ./_build/src/github.com/patsevanton/
-cp ../SOURCES/main.go ./_build/src/github.com/patsevanton/
+cp ../SOURCES/main.go _build/src/github.com/patsevanton/nist_data_mirror_golang
 echo $(pwd)
 export GOPATH=$(pwd)/_build
 export PATH=$PATH:$(pwd)/_build/bin
