@@ -22,7 +22,7 @@ go env
 go get -u github.com/gocolly/colly
 echo $(pwd)
 pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
-go build 
+go build -o nist-data-mirror
 popd
 
 %install
