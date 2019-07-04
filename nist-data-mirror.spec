@@ -1,5 +1,5 @@
 Name:           nist-data-mirror
-Version:        0.0.5
+Version:        0.0.6
 Release:        1%{?dist}
 Summary:        A simple Golang command-line utility to mirror the CVE JSON data from NIST.
 License:        ASL 2.0 
@@ -7,6 +7,10 @@ Source0:        main.go
 Source1:        nist-data-mirror.service
 
 BuildRequires:  golang
+
+# Use systemd for fedora >= 18, rhel >=7, SUSE >= 12 SP1 and openSUSE >= 42.1
+%define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (!0%{?is_opensuse} && 0%{?suse_version} >=1210) || (0%{?is_opensuse} && 0%{?sle_version} >= 120100)
+
 
 %description
 A simple Golang command-line utility to mirror the CVE XML and JSON data from NIST.
@@ -26,6 +30,30 @@ popd
 install -d %{buildroot}%{_bindir}
 install -p -m 0755 ./nist-data-mirror %{buildroot}%{_bindir}/nist-data-mirror
 
+%if %{use_systemd}
+%{__mkdir} -p %{buildroot}%{_unitdir}
+%{__install} -m644 %{SOURCE1} \
+    %{buildroot}%{_unitdir}/%{name}.service
+%endif
+
+%post
+%if %use_systemd
+/usr/bin/systemctl daemon-reload
+%endif
+
+%preun
+%if %use_systemd
+/usr/bin/systemctl stop %{name}
+%endif
+
+%postun
+%if %use_systemd
+/usr/bin/systemctl daemon-reload
+%endif
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/nist-data-mirror
+%if %{use_systemd}
+%{_unitdir}/%{name}.service
+%endif
