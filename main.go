@@ -7,16 +7,23 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/gocolly/colly"
 )
 
 func main() {
 	linksURL := scapePage("https://nvd.nist.gov/vuln/data-feeds")
+	for t := range time.NewTicker(24 * time.Hour).C {
+		periodicFunction(linksURL)
+	}
+}
+
+func periodicFunction(linksURL) {
 	for _, URL := range linksURL {
 		fileName := filepath.Base(URL)
 		fmt.Printf("Download %v from %v\n", fileName, URL)
-		absPathFilename := filepath.Join("/var/www/repos/nist-data-mirror/", fileName) 
+		absPathFilename := filepath.Join("/var/www/repos/nist-data-mirror/", fileName)
 		if _, err := os.Stat(absPathFilename); os.IsNotExist(err) {
 			if err := downloadFile(absPathFilename, URL); err != nil {
 				panic(err)
@@ -25,6 +32,7 @@ func main() {
 			fmt.Printf("file %v exist \n", absPathFilename)
 		}
 	}
+
 }
 
 func scapePage(url string) []string {
