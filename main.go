@@ -16,12 +16,13 @@ func main() {
 	for _, URL := range linksURL {
 		fileName := filepath.Base(URL)
 		fmt.Printf("Download %v from %v\n", fileName, URL)
-		if _, err := os.Stat(fileName); os.IsNotExist(err) {
-			if err := downloadFile(fileName, URL); err != nil {
+		absPathFilename := filepath.Join("/var/www/repos/nist-data-mirror/", fileName) 
+		if _, err := os.Stat(absPathFilename); os.IsNotExist(err) {
+			if err := downloadFile(absPathFilename, URL); err != nil {
 				panic(err)
 			}
 		} else {
-			fmt.Printf("file %v exist \n", fileName)
+			fmt.Printf("file %v exist \n", absPathFilename)
 		}
 	}
 }
