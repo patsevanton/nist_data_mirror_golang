@@ -5,19 +5,22 @@ Summary:        This application is an example for the golang binary RPM spec
 License:        ASL 2.0 
 Source0:        nist-data-mirror.go
 #Source1:        nist-data-mirror.service
+
 BuildRequires:  golang
 
 %description
 # include your full description of the application here.
 
 %build
-# set up temporary build gopath, and put our directory there
-mkdir -p ./_build/src/nist-data-mirror
-go get -u github.com/gocolly/colly
+mkdir -p ./_build/src/github.com/patsevanton/
+ln -s $(pwd) ./_build/src/github.com/patsevanton/nist_data_mirror_golang
+export GOPATH=$(pwd)/_build
+export PATH=$PATH:$(pwd)/_build/bin
 
-export GOPATH=$(pwd)/BUILD:%{gopath}
-echo $GOPATH
-go build -o nist-data-mirror .
+go get -u github.com/gocolly/colly
+pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
+make
+popd
 
 %install
 install -d %{buildroot}%{_bindir}
