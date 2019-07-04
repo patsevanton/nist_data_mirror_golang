@@ -14,12 +14,13 @@ import (
 
 func main() {
 	linksURL := scapePage("https://nvd.nist.gov/vuln/data-feeds")
-	for t := range time.NewTicker(24 * time.Hour).C {
+	for {
 		periodicFunction(linksURL)
+		time.Sleep(24 * time.Hour)
 	}
 }
 
-func periodicFunction(linksURL) {
+func periodicFunction(linksURL []string) {
 	for _, URL := range linksURL {
 		fileName := filepath.Base(URL)
 		fmt.Printf("Download %v from %v\n", fileName, URL)
