@@ -12,5 +12,5 @@ done
 
 mkdir -p ./{RPMS,SRPMS,BUILD,SOURCES,SPECS}
 cp nist-data-mirror.service ./SOURCES
-cp nist-data-mirror.go ./SOURCES
+cp main.go ./SOURCES
 rpmbuild --quiet --define "_topdir `pwd`" -bb nist-data-mirror.spec
