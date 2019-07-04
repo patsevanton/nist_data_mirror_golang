@@ -17,7 +17,7 @@ ln -s $(pwd) ./_build/src/github.com/patsevanton/nist_data_mirror_golang
 echo $(pwd)
 export GOPATH=$(pwd)/_build
 export PATH=$PATH:$(pwd)/_build/bin
-echo $(GOPATH)
+go env
 
 go get -u github.com/gocolly/colly
 #go get -u github.com/kardianos/govendor
