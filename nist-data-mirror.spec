@@ -19,7 +19,8 @@ export PATH=$PATH:$(pwd)/_build/bin
 
 go get -u github.com/gocolly/colly
 pushd _build/src/github.com/patsevanton/nist_data_mirror_golang
-make
+govendor sync
+go build
 popd
 
 %install
