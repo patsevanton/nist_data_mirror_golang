@@ -1,6 +1,6 @@
 Name:           nist-data-mirror
 Version:        0.0.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A simple Golang command-line utility to mirror the CVE JSON data from NIST.
 License:        ASL 2.0 
 Source0:        main.go
@@ -28,6 +28,7 @@ popd
 
 %install
 install -d %{buildroot}%{_bindir}
+install -d %{buildroot}/var/www/repos/nist-data-mirror
 install -p -m 0755 ./nist-data-mirror %{buildroot}%{_bindir}/nist-data-mirror
 
 %if %{use_systemd}
@@ -54,6 +55,7 @@ install -p -m 0755 ./nist-data-mirror %{buildroot}%{_bindir}/nist-data-mirror
 %files
 %defattr(-,root,root,-)
 %{_bindir}/nist-data-mirror
+/var/www/repos/nist-data-mirror
 %if %{use_systemd}
 %{_unitdir}/%{name}.service
 %endif
