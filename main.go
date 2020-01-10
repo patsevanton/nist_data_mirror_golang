@@ -45,10 +45,8 @@ func scapePage(url string) []string {
 	// Find and visit all links
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		foundURL := e.Request.AbsoluteURL(e.Attr("href"))
-		if strings.Contains(foundURL, "https://nvd.nist.gov/feeds/json/cve/1.0") {
-		    if(strings.Contains(e.Attr("href"), "json/cve")) {
-		        linksURL = append(linksURL, e.Attr("href"))
-		    }
+		if strings.Contains(foundURL, "https://nvd.nist.gov/feeds/json/cve/1.1") {
+		    linksURL = append(linksURL, e.Attr("href"))
 		}
 	})
 
