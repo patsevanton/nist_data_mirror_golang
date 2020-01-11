@@ -9,3 +9,5 @@ yum -y install nist-data-mirror
 
 systemctl start nist-data-mirror
 ```
+
+nist-data-mirror mirror the CVE JSON data from NIST to /var/www/repos/nist-data-mirror/
